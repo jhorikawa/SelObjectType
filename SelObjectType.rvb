@@ -1,0 +1,24 @@
+Option Explicit
+'Script written by <Junichiro Horikawa>
+'Script copyrighted by <Junichiro Horikawa>
+'Script version 2011年11月17日 19:48:12
+
+Call Main()
+Sub Main()
+	Dim strLayer, strObj,arrObj,intType,strO
+	Dim arrResults
+	
+	strObj = Rhino.GetObject("Select base object for selecting same type",, True)
+	If IsNull(strObj) Then Exit Sub
+	intType = Rhino.ObjectType(strObj)
+	
+	
+	Rhino.EnableRedraw(False)
+	arrObj = Rhino.ObjectsByType(intType)
+	If Not IsArray(arrObj) Then Exit Sub
+	Rhino.UnselectAllObjects()
+	
+	Rhino.SelectObjects(arrObj)
+	
+	Rhino.EnableRedraw(True)
+End Sub
